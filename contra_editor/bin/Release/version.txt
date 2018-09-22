@@ -1,0 +1,71 @@
+/=============================\
+|Contra Editor Version History|
+\=============================/
+
+Alpha 0.33
+==========
+- Color fix
+- Enemy edit fix
+- Better error handling at startup
+
+Alpha 0.32
+==========
+- Added enemy editing
+- Added folder for data files
+
+Alpha 0.31
+==========
+- Fixed mayor problem with performance
+- Fixed mayor level editing problems
+  (the level that comes after the one that you have edited just got messed up)
+- Minor fixes
+
+Alpha 0.3
+=========
+- Added 5 levels to the Super Contra editor
+
+Alpha 0.2.2
+===========
+- Added Super Contra support, only the 1st level is available at this time
+- 1st level has minor bugs in the editor, only with towers
+
+Alpha 0.2.1
+===========
+- Mayor bug fix, because only can edited 1st sceens in alpha 0.2, data read incorrectly
+- Minor bugfix with level 7 bug when you edited level 5 or 6, but still have a minor bug level 7
+  (only 1 unknown object will appear at the upper left corner)
+
+Alpha 0.2
+=========
+- Added all levels except level 2 and 4 (base levels)
+- Ripped all level palettes
+- Level 3 have some weird objects, it's fully editable, but it works backwards
+- Only can edit level 5 to the fist tank boss's screen, after that the level
+  messes up for unknown reasons
+- Level 6 can be edited, but without the boss screens (last 1 or 2)
+- Level 7 is ok
+- Level 8 screens are messed up after the first boss
+
+Alpha 0.1.2
+===========
+- Rewritten 1/4 of the code, scene removed, added scrollbar
+- Level load time increased, but precise saving
+- Fixed length (recommended modifying: length > 0), works MOST of times
+- Note:
+  screen bytes = (length > 0) + (length = 0) if more or less screens can mess up
+  but I'm not sure about this is true about the level generation
+  If you can understand this I think you won't have any problems with the length.
+- Added map glitch scanner, it can take a little time to inform you
+  (info from current screen, not whole map, NOT TESTED FULLY!)
+- With length might mess up 2nd level data
+- Map reading is 99% precise
+
+Alpha 0.1.1
+===========
+- Added blue selection color, fixed misclicks
+- Fixed length, but only works with length > 0 and cannot be 0 if greater than 0
+- Reset Orig button is enabled on start
+
+Alpha 0.1
+=========
+- First release

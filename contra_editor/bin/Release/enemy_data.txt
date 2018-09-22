@@ -1,0 +1,260 @@
+Source: http://acmlm.kafuka.org/board/thread.php?id=3739
+
+'       Jungle
+'           screen pointers:    0x0B83B
+'           data start:         0x0B855
+'           data end:           0x0B8B9
+'       Base I
+'           screen pointers:    0x0B8BA
+'           data start:         0x0B8C6
+'           data end:           0x0B91C
+'       Waterfall
+'           screen pointers:    0x0B91D
+'           data start:         0x0B931
+'           data end:           0x0
+'
+'       Snow Field
+'           screen pointers:    0x0BA58
+'           data start:         0x0BA84
+'           data end:           0x0
+'       Energy Zone
+'           screen pointers:    0x0BB34
+'           data start:         0x0BB4E
+'           data end:           0x0
+'       Hangar
+'           screen pointers:    0x0BBC7
+'           data start:         0x0BBE5
+'           data end:           0x0
+
+'   Enemy Data
+'
+'       Level Type: 00 - outdoor
+'
+'                       XX EE YY
+'
+'               XX : X coordinate       XXXX XXXX
+'                                       ++++-++++--X coordinate
+'
+'               EE : Enemy Type         mmTT TTTT
+'                                       ||++-++++--object type
+'                                       ++---------multiplier
+'
+'                                               The multiplier is used to define multiple instances of
+'                                               the same object on the same "page". Each object will have
+'                                               its own YY byte (to define Y-coor and behavior). The only
+'                                               downfall, is that all objets share the same XX byte. The
+'                                               number of objects defined is mm + 1 (so the max is 4).
+'
+'               YY : Y coordinate       YYYY Yaaa
+'                                       |||| |+++--attributes
+'                                       ++++-+-----Y coordinate
+'
+'                                               The attribute bits define seperate behaviors for the same
+'                                               object, though to some objects, these have no effect. The
+'                                               actual "on screen" y-coordinate is (YYYYY * 8).
+
+'       Enemy Types          Level                      Usage
+'       -----------          ------------               ------------------------
+'                            x=untested
+'                            -=glitch
+'                            #=ok
+' --------------------------------------------
+'       00=weapon            1xxx567x                   [3] - XX 00 YY
+'                                                           YY = YYYY YTTT
+'                                                                |||| |+++--weapon type
+'                                                                |||| |         000=[R]rapid fire
+'                                                                |||| |         001=[M]machine gun
+'                                                                |||| |         010=[F]flame thrower
+'                                                                |||| |         011=[S]spread gun
+'                                                                |||| |         100=[L]laser
+'                                                                |||| |         101=[B]invincibility
+'                                                                |||| |         110=[ ]kill all enemies on screen
+'                                                                |||| |         111=UNUSED (same as 110, but no object is visible)
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       01=
+' --------------------------------------------
+'       02=weapon box        1xxx567x                   [3] - XX 02 YY  (see obj #00 for description)
+' --------------------------------------------
+'       03=weapon drop       1xxx567x                   [3] - XX 03 YY  (see obj #00 for description)
+' --------------------------------------------
+'       04=small turret      1xxx-xxx                   [3] - XX 04 YY
+'                                                           YY = YYYY Yxxx
+'                                                                |||| ||++--# of shots fired (00=1, 01=2, 10/11=3)
+'                                                                |||| |+----???
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       05=running man       1xxx-xxx                   [3] - XX 05 YY
+'                                                           YY = YYYY YSxD
+'                                                                |||| |||+--direction (0=left;1=right)
+'                                                                |||| ||+---go prone (0=false; 1=true)
+'                                                                |||| |+----stop'n'shoot (0=false;1=true)
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       06=rifle man         1xxx567x                   [3] - XX 06 YY
+'                                                           YY = YYYY YxCH
+'                                                                |||| |||+--hide'n'shoot (0=false;1=true)
+'                                                                |||| ||+---crouch'n'shoot (0=false;1=true)
+'                                                                |||| |+----???
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       07=large turret      1xxx-xxx                   [3] - XX 07 YY
+'                                                           YY = YYYY YuuB
+'                                                                |||| |||+--background (0=rock; 1=jungle)
+'                                                                |||| |++---UNUSED
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       08=3-way d-spread    -xxx-xxx                   [3] - XX 08 YY
+'                                                           YY = YYYY Yxxx
+'                                                                |||| |||+--
+'                                                                |||| ||+---
+'                                                                |||| |+----
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       09=
+' --------------------------------------------
+'       0A=
+' --------------------------------------------
+'       0B=up mortar         1xxxxxxx                   [3] - XX 0B YY
+'                                                           YY = YYYY Ymmm
+'                                                                |||| |+++--projectile mode
+'                                                                |||| |          000=UP x3 spread
+'                                                                |||| |          001=UP x1
+'                                                                |||| |          010=UP/R x1
+'                                                                |||| |          011=UP/L x1
+'                                                                |||| |          100=UP x1 (high)
+'                                                                |||| |          101=UP/L x1 (high)
+'                                                                |||| |          110=UP/L+ x1 (high)
+'                                                                |||| |          111=UP/L++ x1 (high)
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       0C=mortar man        -xxx5xxx                   [3] - XX 0C YY
+'                                                           YY = YYYY Yxxx
+'                                                                |||| |+++--UNUSED
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       0D=
+' --------------------------------------------
+'       0E=turret man        -xxxx67x                   [3] - XX 0E YY
+'                                                           YY = YYYY YSSS
+'                                                                |||| |+++--firing speed
+'                                                                |||| |         000=fastest
+'                                                                |||| |          ...
+'                                                                |||| |         111=slowest
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       0F=
+' --------------------------------------------
+'       10=bomb turret       1xxx---x                   [3] - XX 10 YY
+'                                                           YY = YYYY YxxB
+'                                                                |||| |||+--background (0=wall; 1=jungle)
+'                                                                |||| |++---UNUSED
+'                                                                ++++-+-----Y coor
+'
+'          grenade           -xxx5--x                   [3] - XX 10 YY
+'                                                           YY = YYYY Yxxx
+'                                                                |||| |||+--
+'                                                                |||| ||+---
+'                                                                |||| |+----
+'                                                                ++++-+-----Y coor
+'
+'          downward flame    -xxx-6-x                   [3] - XX 10 YY
+'                                                           YY = YYYY Yxmm
+'                                                                |||| ||++--mode
+'                                                                |||| ||        00=48p + motion activated
+'                                                                |||| ||        01=80p + motion activated
+'                                                                |||| ||        10=112p + motion activated
+'                                                                |||| ||        11=128p + motion activated
+'                                                                |||| |+----???
+'                                                                ++++-+-----Y coor
+'
+'          claw              -xxx--7x                   [3] - XX 10 YY
+'                                                           YY = YYYY Ymmm
+'                                                                |||| |+++--mode
+'                                                                |||| |         000=64p [fast start]
+'                                                                |||| |         001=56p
+'                                                                |||| |         010=96p [fast start]
+'                                                                |||| |         011=56p + motion activated
+'                                                                |||| |         100=64p
+'                                                                |||| |         101=56p [fast tempo]
+'                                                                |||| |         110=96p
+'                                                                |||| |         111=64p + motion activated
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       11=sound fx          1xxx---x                   [3] - XX 11 YY
+'                                                           YY = YYYY Yxxx
+'                                                                |||| |+++--???
+'                                                                ++++-+-----Y coor
+'
+'          single grenade    -xxx5--x                   [3] - XX 11 YY
+'                                                           YY = YYYY Yxxx
+'                                                                |||| |||+--
+'                                                                |||| ||+---
+'                                                                |||| |+----
+'                                                                ++++-+-----Y coor
+'
+'          left flame        -xxx-6-x                   [3] - XX 11 YY
+'                                                           YY = YYYY Yxmm
+'                                                                |||| ||++--mode
+'                                                                |||| ||        00=48p
+'                                                                |||| ||        01=80p
+'                                                                |||| ||        10=112p
+'                                                                |||| ||        11=128p
+'                                                                |||| |+----???
+'                                                                ++++-+-----Y coor
+'
+'          spiked wall       -xxx--7x                   [3] - XX 11 YY
+'                                                           YY = YYYY YSRR
+'                                                                |||| ||++--rise speed
+'                                                                |||| ||         000=slow
+'                                                                |||| ||          ...
+'                                                                |||| ||         000=fast
+'                                                                |||| |+----quick start (0=false; 1=true)
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       12=explosion         1xxx--xx                   [3] - XX 12 YY
+'                                                           YY = YYYY Yxxx
+'                                                                |||| |+++--UNUSED
+'                                                                ++++-+-----Y coor
+'
+'          armored vehicle   -xxx5-xx                   [3] - XX 12 YY
+'                                                           YY = YYYY Yxxx
+'                                                                |||| |||+--
+'                                                                |||| ||+---
+'                                                                |||| |+----
+'                                                                ++++-+-----Y coor
+'
+'          right flame       -xxx-6xx                   [3] - XX 12 YY
+'                                                           YY = YYYY Yxmm
+'                                                                |||| ||++--mode
+'                                                                |||| ||        00=48p
+'                                                                |||| ||        01=80p
+'                                                                |||| ||        10=112p
+'                                                                |||| ||        11=128p
+'                                                                |||| |+----???
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       13=mine cart (<-)    -xxxxx7x                   [3] - XX 13 YY
+'                                                           YY = YYYY Yxxx
+'                                                                |||| |+++--???
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       14=BOSS Level #??    -xxxxx1x                   [?] - XX 14 YY
+'                                                           YY = YYYY Yxxx
+'                                                                |||| |+++--???
+'                                                                ++++-+-----Y coor
+'
+'          mine cart (stop)  -xxxxx7x                   [3] - XX 14 YY
+'                                                           YY = YYYY Yxxx
+'                                                                |||| |+++--???
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       15=mine cart (s->)   -xxxxx7x                   [3] - XX 15 YY
+'                                                           YY = YYYY Yxxx
+'                                                                |||| |+++--???
+'                                                                ++++-+-----Y coor
+' --------------------------------------------
+'       16=small explosion   xxxx5xxx                   [3] - XX 16 YY
+'                                                           YY = YYYY Yxxx
+'                                                                |||| |+++--???
+'                                                                ++++-+-----Y coor

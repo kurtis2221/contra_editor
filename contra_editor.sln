@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C# Express 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "contra_editor", "contra_editor\contra_editor.csproj", "{3D50A824-FBC8-4F0D-95F3-64993ACD201E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "supercontra_editor", "supercontra_editor\supercontra_editor.csproj", "{D8ED4EA0-F96D-4557-8874-00225D942E56}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D50A824-FBC8-4F0D-95F3-64993ACD201E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D50A824-FBC8-4F0D-95F3-64993ACD201E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D50A824-FBC8-4F0D-95F3-64993ACD201E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D50A824-FBC8-4F0D-95F3-64993ACD201E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8ED4EA0-F96D-4557-8874-00225D942E56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8ED4EA0-F96D-4557-8874-00225D942E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8ED4EA0-F96D-4557-8874-00225D942E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8ED4EA0-F96D-4557-8874-00225D942E56}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
